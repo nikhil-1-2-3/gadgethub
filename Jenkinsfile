@@ -5,31 +5,31 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/nikhil-1-2-3/gadgethub.git'
+                git branch: 'main', url: 'https://github.com/nikhil-1-2-3/gadgethub.git'
             }
         }
 
         stage('Build Containers') {
             steps {
-                sh 'docker-compose build'
+                bat 'docker-compose build'
             }
         }
 
         stage('Stop Old Containers') {
             steps {
-                sh 'docker-compose down'
+                bat 'docker-compose down'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'docker-compose up -d'
+                bat 'docker-compose up -d'
             }
         }
 
         stage('Verify') {
             steps {
-                sh 'docker ps'
+                bat 'docker ps'
             }
         }
     }
